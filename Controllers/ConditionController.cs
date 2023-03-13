@@ -50,8 +50,8 @@ namespace ConditionTable.Controllers
         [HttpPost("EditRule")]
         public IActionResult EditRule(Models.Rule rule) 
         {
-            var result = _ruleService.EditRule(rule);
-            return PartialView("_EditRule");
+            _ruleService.EditRule(rule);
+            return RedirectToAction("Index");
         }
         [HttpGet("Delete/{id}")]
         public IActionResult Delete(string id)

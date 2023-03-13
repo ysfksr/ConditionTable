@@ -5,6 +5,7 @@ using ConditionTable.Entity;
 using ConditionTable.Abstracts;
 using ConditionTable.Enums;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace ConditionTable.Service
 {
@@ -17,7 +18,7 @@ namespace ConditionTable.Service
         }
         public RuleViewModel AddRule(RuleDbModel model)
         {
-            if(model.UpperBound <= model.LowerBound)
+            if(model == null || model.UpperBound <= model.LowerBound)
             {
                 return new RuleViewModel
                 {
@@ -209,6 +210,16 @@ namespace ConditionTable.Service
         private string GuidWithoutScore()
         {
             return Guid.NewGuid().ToString().Replace("-","");
+        }
+        public void EditRule(Rule rule)
+        {
+            var allRules = _ruleRepository.GetAllRules();
+            var modifiedRule = allRules.FirstOrDefault(X => X.Id == rule.Id);
+
+            allRules.Remove(modifiedRule);
+            modifiedRule.Result = rule.Result;
+            allRules.Add(modifiedRule);
+            _ruleRepository.AddRule(allRules);
         }
     }
 }

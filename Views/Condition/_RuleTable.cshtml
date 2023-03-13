@@ -1,5 +1,7 @@
 ﻿@model RuleViewModel
 
+
+
 <div id="RuleTableDivider">
     @if (Model.ErrorMessage != null)
     {
@@ -14,23 +16,41 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.Rules)
+            @if(Model != null)
             {
-                <tr>
-                    <td>@item.Interval</td>
-                    <td> <a id="@item.Id">@item.Result</a></td>
-                    <td>
+                foreach (var item in Model.Rules)
+                {
+                    <tr>
+                        <td>@item.Interval</td>
+                        <td> <a id="@item.Id">@item.Result</a></td>
+                        <td>
 
-                        @if (!item.Interval.Contains("∞"))
-                        {
-                            <a class="btn btn-primary" id="btnDelete" href="/Condition/Delete/@item.Id">x</a>
-                        }
-                        <a class="btn btn-outline-primary" data="/Condition/Edit/@item.Id" >Edit</a>
-                    </td>
-                </tr>
+                            @if (!item.Interval.Contains("∞"))
+                            {
+                                <a class="btn btn-primary" id="btnDelete" href="/Condition/Delete/@item.Id">x</a>
+                            }
+                            <a class="btn btn-outline-primary" data="/Condition/Edit/@item.Id">Edit</a>
+                        </td>
+                    </tr>
+                }
             }
         </tbody>
     </table>
     <p class="noteBoxes type3">Do not forget setting the result ​​of the intervals leading to plus infinity and minus infinity.</p>
 </div>
 
+<script>
+    $(".btn-outline-primary").click(function () {
+        var url = $(this).attr('data');
+        $.ajax({
+            url: url,
+            method: 'GET',
+            contentType: 'application/json',
+            success: function (response) {
+                console.log(response);
+                $('#myModal').html(response);
+                $('#myModal').modal('show');
+            }
+        });
+    });
+</script>

@@ -50,17 +50,5 @@ $("#btnAddRule").click(function () {
     });
 });
 
-$(".btn-outline-primary").click(function () {
-    var url = $(this).attr('data');
-    $.ajax({
-        url: url,
-        method: 'GET',
-        contentType: 'application/json',
-        success: function (response) {
-            console.log(response);
-            $('#myModal').html(response);
-            $('#myModal').modal('show');
-        }
-    });
-});
+
 

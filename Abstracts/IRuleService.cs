@@ -8,5 +8,6 @@ namespace ConditionTable.Abstracts
         RuleViewModel AddRule(RuleDbModel model);
         RuleViewModel GetAllRules();
         void Delete(string id);
+        void EditRule(Rule rule);
     }
 }
