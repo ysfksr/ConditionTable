@@ -16,7 +16,7 @@
             </tr>
         </thead>
         <tbody>
-            @if(Model != null)
+            @if (Model != null)
             {
                 foreach (var item in Model.Rules)
                 {
@@ -36,6 +36,14 @@
             }
         </tbody>
     </table>
+    @if (Model != null && Model.Rules.Any())
+    {
+        <div align="right" style="width:80%;margin-top:10px;">
+            <form asp-action="TruncateTable" asp-controller="Condition" method="get">
+                <button type="submit" class="btn btn-outline-danger" id="truncateTable">Truncate The Table</button>
+            </form>
+        </div>
+    }
     <p class="noteBoxes type3">Do not forget setting the result ​​of the intervals leading to plus infinity and minus infinity.</p>
 </div>
 

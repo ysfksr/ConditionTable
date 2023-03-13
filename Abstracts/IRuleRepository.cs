@@ -7,6 +7,7 @@ namespace ConditionTable.Abstracts
     {
         bool AddRule(List<RuleDbModel> model);
         List<RuleDbModel> GetAllRules();
+        void TruncateTable();
         bool IsDataExist();
     }
 }

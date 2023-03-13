@@ -191,6 +191,10 @@ namespace ConditionTable.Service
                 return returnModel;
             }
         }
+        public void TruncateTable()
+        {
+            _ruleRepository.TruncateTable();
+        }
         public void Delete(string id)
         {
             var allRules = _ruleRepository.GetAllRules();

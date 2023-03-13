@@ -69,6 +69,15 @@ namespace ConditionTable.Repository
             }
 
         }
+        public void TruncateTable()
+        {
+            string filePath = _configuration["FileLocation"];
+
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+        }
         public bool IsDataExist()
         {
             try

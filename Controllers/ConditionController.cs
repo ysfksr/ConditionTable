@@ -59,5 +59,12 @@ namespace ConditionTable.Controllers
             _ruleService.Delete(id);
             return RedirectToAction("Index");
         }
+
+        [HttpGet("TruncateTable")]
+        public IActionResult TruncateTable()
+        {
+            _ruleService.TruncateTable();
+            return RedirectToAction("Index");
+        }
     }
 }
