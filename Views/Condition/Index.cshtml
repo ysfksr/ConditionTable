@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "Rules";
+}
+@model RuleViewModel
+
+<head>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/404.css" asp-append-version="true" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="~/js/site.js"></script>
+</head>
+<body>
+    <div align="center">
+        <button class="btn btn-primary" id="btnAddRuleTable"> Add Rule To Condition Table</button>
+    </div>
+
+    <div align="center">
+        <p class="noteBoxes type3">The rules you add will be automatically added towards minus infinity and plus infinity.</p>
+
+        <div id="AddRuleDivider" hidden>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Lower Bound</th>
+                        <th>E/LE</th>
+                        <th>Variable</th>
+                        <th>E/GE</th>
+                        <th>Upper Bound</th>
+                        <th>Result</th>
+                        <th>add</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="number" id="inputLowerBound" /></td>
+                        <td>
+                            <button class="btn btn-secondary" type="button" value="3" id="leftEquality">&le;</button>
+                        </td>
+                        <td><h1 align="center">C1</h1></td>
+                        <td>
+                            <button class="btn btn-secondary" type="button" value="4" id="rightEquality">&le;</button>
+                        </td>
+                        <td><input type="number" id="inputUpperBound" /></td>
+                        <td><input type="number" id="inputResult" /></td>
+                        <td><button class="btn btn-secondary" id="btnAddRule">+</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="RuleTable">
+            @if (Model != null && Model.Rules != null)
+            {
+                @Html.Partial("_RuleTable", Model)
+            }
+            else
+            {
+                <section class="page_404">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12 ">
+                                <div class="col-sm-10 col-sm-offset-1  text-center">
+                                    <div class="four_zero_four_bg">
+                                        <h1 class="text-center "></h1>
+                                    </div>
+
+                                    <div class="contant_box_404">
+                                        <h3 class="h2">
+                                            There is No Rule, You can add a rule with the button above :)
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            }
+        </div>
+    </div>
+</body>

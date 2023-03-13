@@ -1,0 +1,76 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+
+table {
+    border-collapse: collapse;
+    width: 80%;
+    margin-top: 50px;
+}
+
+th, td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+input[type=number] {
+    width: 100%;
+    border: 2px solid #aaa;
+    border-radius: 4px;
+    margin: 8px 0;
+    outline: none;
+    padding: 8px;
+    box-sizing: border-box;
+    transition: .3s;
+}
+
+    input[type=number]:focus {
+        border-color: dodgerBlue;
+        box-shadow: 0 0 8px 0 dodgerBlue;
+    }
+
+
+
+.noteBoxes {
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+    margin-top: 35px;
+    width: 80%;
+}
+
+.type2 {
+    border-color: #dc3545;
+    background-color: rgba(128,3,47, 0.1);
+}
+
+.type3 {
+    border-color: #0096C7;
+    background-color: rgba(0, 150, 199, 0.1);
+}

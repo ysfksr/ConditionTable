@@ -1,0 +1,29 @@
+﻿@model RuleViewModel
+
+<div id="RuleTableDivider">
+    @if (Model.ErrorMessage != null)
+    {
+        <p class="noteBoxes type2">@Model.ErrorMessage</p>
+    }
+    <table id="ruleTable">
+        <thead>
+            <tr>
+                <th>Interval</th>
+                <th>Result</th>
+                <th>Delete/Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Rules)
+            {
+                <tr>
+                    <td>@item.Interval</td>
+                    <td> <a id="@item.Id">@item.Result</a></td>
+                    <td><button id="btnDelete" href="/Delete/@item.Id">x</button> <button id="btnEdit" href="/Edit/@item.Id">Edit</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p class="noteBoxes type3">Do not forget setting the result ​​of the intervals leading to plus infinity and minus infinity.</p>
+</div>
+
