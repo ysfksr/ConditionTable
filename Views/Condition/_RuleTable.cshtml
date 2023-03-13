@@ -19,7 +19,14 @@
                 <tr>
                     <td>@item.Interval</td>
                     <td> <a id="@item.Id">@item.Result</a></td>
-                    <td><button id="btnDelete" href="/Delete/@item.Id">x</button> <button id="btnEdit" href="/Edit/@item.Id">Edit</button></td>
+                    <td>
+
+                        @if (!item.Interval.Contains("∞"))
+                        {
+                            <a class="btn btn-primary" id="btnDelete" href="/Condition/Delete/@item.Id">x</a>
+                        }
+                        <a class="btn btn-outline-primary" data="/Condition/Edit/@item.Id" >Edit</a>
+                    </td>
                 </tr>
             }
         </tbody>
