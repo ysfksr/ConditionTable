@@ -18,7 +18,7 @@ namespace ConditionTable.Service
         }
         public RuleViewModel AddRule(RuleDbModel model)
         {
-            if(model == null || model.UpperBound <= model.LowerBound)
+            if (model == null || model.UpperBound <= model.LowerBound)
             {
                 return new RuleViewModel
                 {
@@ -133,6 +133,64 @@ namespace ConditionTable.Service
 
             return returnModel;
         }
+        public RuleViewModel GetRuleByIntervalValue(decimal value)
+        {
+            var rules = _ruleRepository.GetAllRules().Where(x => x.UpperBound >= value && x.LowerBound <= value);
+
+            var returnModel = new RuleViewModel();
+            returnModel.Rules = new List<Rule>();
+            if (!rules.Any())
+            {
+                returnModel.ErrorMessage = "Undefined Value";
+                return returnModel;
+            }
+
+            if (rules.Count() > 1)
+            {
+                if(rules.Any(x => x.UpperBound == value && x.RightEquality == (int)EqualityTypes.GreaterAndEqual))
+                {
+                    var rule = rules.Where(x => x.UpperBound == value && x.RightEquality == (int)EqualityTypes.GreaterAndEqual).FirstOrDefault();
+
+                    string Interval = RuleAsString(rule);
+
+                    returnModel.Rules.Add(new Rule
+                    {
+                        Interval = Interval,
+                        Result = rule.Result
+                    });
+
+                    return returnModel;
+                }
+                else if(rules.Any(x => x.LowerBound == value && x.LeftEquality == (int)EqualityTypes.LowerAndEqual))
+                {
+                    var rule = rules.Where(x => x.LowerBound == value && x.LeftEquality == (int)EqualityTypes.LowerAndEqual).FirstOrDefault();
+
+                    string Interval = RuleAsString(rule);
+
+                    returnModel.Rules.Add(new Rule
+                    {
+                        Interval = Interval,
+                        Result = rule.Result
+                    });
+
+                    return returnModel;
+                }
+                return returnModel;
+            }
+            else
+            {
+                var rule = rules.FirstOrDefault();
+                string Interval = RuleAsString(rule);
+
+                returnModel.Rules.Add(new Rule
+                {
+                    Interval = Interval,
+                    Result = rule.Result
+                });
+
+                return returnModel;
+            }
+        }
         public void Delete(string id)
         {
             var allRules = _ruleRepository.GetAllRules();
@@ -141,7 +199,7 @@ namespace ConditionTable.Service
 
             allRules.Remove(deleteRule);
 
-             _ruleRepository.AddRule(allRules);
+            _ruleRepository.AddRule(allRules);
 
         }
         private string RuleAsString(RuleDbModel rule)
@@ -209,7 +267,7 @@ namespace ConditionTable.Service
         }
         private string GuidWithoutScore()
         {
-            return Guid.NewGuid().ToString().Replace("-","");
+            return Guid.NewGuid().ToString().Replace("-", "");
         }
         public void EditRule(Rule rule)
         {

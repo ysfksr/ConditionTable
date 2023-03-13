@@ -1,8 +1,40 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Inquiry Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<head>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/404.css" asp-append-version="true" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="~/js/site.js"></script>
+</head>
+<body>
+    <div align="center">
+        <p class="noteBoxes type3">Welcome To Conditional Inquiry System. The value you will write below will be queried in the table and its equivalent will be returned. If there is no value, a Warning will be given. </p>
+    </div>
+    <div align="center" class="inquiryArea">
+        <input type="number" id="inquryValue" class="inquiryInput" style="width:30%;" />
+        <button id="btnInquiryForResult" style="margin-bottom:6px" class="btn btn-success">+</button>
+    </div>
+    <div align="center" id="resultForInquiry" style="visibility:hidden;">
+        @Html.Partial("_ResultPartialView");
+    </div>
+</body>
+
+<script>
+    $("#btnInquiryForResult").click(function () {
+        var url = '/Home/GetInterval/' + $("#inquryValue").val();
+
+        console.log(url)
+
+        $.ajax({
+            url: url,
+            method: 'GET',
+            contentType: 'application/json',
+            success: function (response) {
+                $('#resultForInquiry').html(response);
+                $('#resultForInquiry').css("visibility", "visible");
+            }
+        });
+    });
+</script>

@@ -1,0 +1,38 @@
+﻿@model RuleViewModel
+@if (Model != null && Model.Rules.Any())
+{
+    <table class="table" style="width:60%">
+
+        <thead>
+            <tr>
+                <th>
+                    Your Interval
+                </th>
+                <th>
+                    Value
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.Rules)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Interval)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Result)
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}
+else if (Model != null && Model.ErrorMessage != null)
+{
+    <div align="center">
+        <p class="noteBoxes type2">@Model.ErrorMessage</p>
+    </div>
+}

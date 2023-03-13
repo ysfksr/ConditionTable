@@ -9,5 +9,6 @@ namespace ConditionTable.Abstracts
         RuleViewModel GetAllRules();
         void Delete(string id);
         void EditRule(Rule rule);
+        RuleViewModel GetRuleByIntervalValue(decimal value);
     }
 }
